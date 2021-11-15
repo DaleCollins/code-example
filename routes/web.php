@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 require __DIR__.'/auth.php';
-Route::view('/', 'welcome');
+Route::get('/{page?}', [PagesController::class, 'show'])->name('pages.show');
 
-Route::middleware('auth')->prefix('admin')->group(function() {
-    Route::view('/dashboard', 'dashboard');
+Route::middleware('auth')
+    ->prefix('admin')
+    ->group(function() {
+    Route::view('/dashboard', 'admin.dashboard')->name('admin.dashboard');
 });
 
 
