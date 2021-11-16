@@ -3,20 +3,19 @@
 namespace Tests\Feature\Http\Controllers;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PagesControllerTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use RefreshDatabase;
 
     /** @test */
     public function a_frontend_page_that_exists_shows_the_correct_view()
     {
         $existingPages = collect([
-            'login' => 'auth.login',
+            'login'    => 'auth.login',
             'register' => 'auth.register',
-            'index' => 'pages.index'
+            'index'    => 'pages.index'
         ]);
         foreach($existingPages as $page => $view) {
             $response = $this->get(route('pages.show', $page));
